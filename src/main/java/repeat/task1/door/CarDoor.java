@@ -1,6 +1,7 @@
 package repeat.task1.door;
 
 import java.util.Locale;
+import java.util.Objects;
 
 public class CarDoor implements Action {
     private Condition doorCondition;
@@ -72,6 +73,24 @@ public class CarDoor implements Action {
             windowCondition = Condition.CLOSE;
             return windowCondition;
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        CarDoor carDoor = (CarDoor) o;
+        return doorCondition == carDoor.doorCondition
+                && windowCondition == carDoor.windowCondition;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(doorCondition, windowCondition);
     }
 
     @Override
