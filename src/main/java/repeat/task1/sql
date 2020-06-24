@@ -1,0 +1,50 @@
+Task №1:
+1. Write a SQL statement that selects the highest grade for each of the cities of the customers.
+
+SELECT city, MAX(grade) FROM customer GROUP BY city;
+
+Task №2:
+1. Write a SQL statement to find the highest purchase amount ordered by the each customer
+on a particular date with their ID, order date and highest purchase amount.
+
+SELECT customer_id,ord_date,MAX(purch_amt)
+FROM orders
+GROUP BY customer_id,ord_date;
+
+2. Write a SQL statement to find the highest purchase amount with their ID and order date,
+for those customers who have a higher purchase amount in a day is within the range 2000 and 6000.
+
+SELECT 	customer_id, ord_date, MAX(purch_amt) FROM orders  GROUP BY ord_date,
+customer_id HAVING MAX(purch_amt) BETWEEN 2000 AND 6000;
+
+Task №3:
+1. Write a SQL statement to find the list of customers who appointed a salesman
+for their jobs who gets a commission from the company is more than 12%.
+
+SELECT customer.cust_name, customer.city, salesman.name, salesman.commission
+FROM customer INNER JOIN salesman ON  customer.salesman_id = salesman.salesman_id
+WHERE salesman.commission > 0.12;
+
+2. Write a SQL statement to make a list in ascending order for the customer
+who works either through a salesman or by own.
+
+SELECT customer.customer_id, customer.cust_name, customer.city, customer.grade, salesman.name, salesman.city
+FROM customer LEFT JOIN salesman ON  customer.salesman_id = salesman.salesman_id
+ORDER BY customer.customer_id;
+
+3. Write a SQL statement to make a list in ascending order for the customer who holds
+a grade less than 300 and works either through a salesman or by own.
+
+SELECT customer.customer_id, customer.cust_name, customer.city, customer.grade, salesman.name, salesman.city
+FROM customer LEFT JOIN salesman ON  customer.salesman_id = salesman.salesman_id
+WHERE customer.grade < 300 ORDER BY customer.customer_id;
+
+Task №4:
+Write a query in SQL to find the names of departments where more than two employees are working.
+
+SELECT emp_department.dpt_name
+FROM emp_details
+INNER JOIN emp_department
+ON emp_dept =dpt_code
+GROUP BY emp_department.dpt_name
+HAVING COUNT(*) > 2;
