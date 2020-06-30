@@ -1,4 +1,4 @@
-package repeat.task1.door;
+package repeat.task1.model;
 
 public interface Action {
     public Condition open();

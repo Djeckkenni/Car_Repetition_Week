@@ -1,15 +1,30 @@
-package repeat.task1.door;
+package repeat.task1.model;
 
 import java.util.Locale;
 import java.util.Objects;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
+@Entity
 public class CarDoor implements Action {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private Condition doorCondition;
     private Condition windowCondition;
+
+    public CarDoor() {
+    }
 
     public CarDoor(String doorCondition, String windowCondition) {
         this.doorCondition = converterEnum(doorCondition);
         this.windowCondition = converterEnum(windowCondition);
+    }
+
+    public Long getId() {
+        return id;
     }
 
     private Condition converterEnum(String value) {
